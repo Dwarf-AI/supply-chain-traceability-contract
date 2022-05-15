@@ -1,0 +1,16 @@
+{
+    "attributes": [
+      {
+        "trait_type": "Breed",
+        "value": "Maltipoo"
+      },
+      {
+        "trait_type": "Eye color",
+        "value": "Mocha"
+      }
+    ],
+    "description": "Best resume.",
+    "image": "ipfs://QmPCsHgbQxxMR79v6GLYhaSxFc9haxbWhnLJZ5QFf4phtF",
+    "name": "Tarun resume"
+  }
+  
