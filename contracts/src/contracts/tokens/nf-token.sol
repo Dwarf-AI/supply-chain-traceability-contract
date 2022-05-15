@@ -307,7 +307,7 @@ contract NFToken is
     internal
     virtual
   {
-    require(false, "DeCert doesn't allow transfer of badges/certificates");
+    require(false, "Autify doesn't allow NFTs");
     address from = idToOwner[_tokenId];
     _clearApproval(_tokenId);
 
