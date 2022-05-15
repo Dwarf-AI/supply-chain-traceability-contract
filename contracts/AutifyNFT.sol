@@ -5,10 +5,10 @@ import "./src/contracts/tokens/nf-token-metadata.sol";
 import "./src/contracts/ownership/ownable.sol";
 import "./Counters.sol";
  
-contract DeCert is NFTokenMetadata, Ownable {
+contract AutifyNFT is NFTokenMetadata, Ownable {
 
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIdCounter;
+  using Counters for Counters.Counter;
+  Counters.Counter private _tokenIdCounter;
  
   constructor() {
     nftName = "Autify";
