@@ -9,6 +9,8 @@ contract AutifyNFT is NFTokenMetadata, Ownable {
 
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIdCounter;
+
+  mapping(uint256 => string[]) packageStageData; 
  
   constructor() {
     nftName = "Autify";
@@ -20,6 +22,15 @@ contract AutifyNFT is NFTokenMetadata, Ownable {
     _tokenIdCounter.increment();
     super._mint(_to, tokenId);
     super._setTokenUri(tokenId, _uri);
+    packageStageData[tokenId].push("created");
+  }
+
+  function updateStage(uint256 _tokenId, string memory _stageData) public onlyOwner {
+    packageStageData[_tokenId].push(_stageData);
+  }
+
+  function getStageData(uint256 _tokenId) public view returns(string[] memory) {
+    return packageStageData[_tokenId];
   }
  
 }
