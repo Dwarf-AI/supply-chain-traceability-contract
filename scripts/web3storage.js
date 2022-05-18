@@ -34,7 +34,14 @@ async function main(){
         image: `${imageCid}/image`
     };
     const jsonfile = new File([JSON.stringify(jsonToUpload)], 'metadata.json');
-    const jsonCid = await web3storage.put([jsonfile]);
+    const jsonCid = await web3storage.put(
+        [jsonfile],
+        {
+            onRootCidReady : (rootCid) => {
+                console.log(rootCid);
+            }
+        }
+    );
     console.log(imageCid,jsonCid);
 }
 
