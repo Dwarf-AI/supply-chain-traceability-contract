@@ -1,45 +1,28 @@
-const { Web3Storage, File } = require('web3.storage');
+const { Web3Storage, getFilesFromPath } = require('web3.storage');
+require('dotenv').config();
+const { fs } = require('fs');
+const { mime } = require('mime');
+const { path } = require('path');
 
-
-async function uploadJson(client, rootCid, body, now, fileName){
-    const jsonToUpload = {
-        name: body.name,
-        description: body.description,
-        validFrom: body.validFrom,
-        validTo: body.validTo,
-        image: `ipfs://${rootCid}/${fileName}.png`
-    };
-    const files = [new File([JSON.stringify(jsonToUpload)], `${now}.json`)];
-    await Promise.all([
-        client.put(files, {
-            name: `Json ${now}`,
-            onRootCidReady: (rootCid) => {
-                callContract(rootCid, now, body.type, body.recieversAddress);
-            }
-        }),
-        saveCertifiate.save()
-    ]).catch((err) => {
-        console.log(err)
-    })
-    
+function getAccessToken () {
+    return process.env.WEB3STORAGE_TOKEN
+}
+  
+function makeStorageClient () {
+    return new Web3Storage({ token: getAccessToken() })
+}
+async function fileFromPath(filePath) {
+    const content = await fs.promises.readFile(filePath)
+    const type = mime.getType(filePath)
+    return new File([content], path.basename(filePath), { type })
 }
 
-/**
- * 
- * @param {json} body 
- */
-async function uploadCertificate(body){
-    const fileName = uid();
-    const now = new Date()
-    const client = makeStorageClient();
-    const binary = Buffer.from(body.image);
-    const files = [new File([binary], `${fileName}.png`)];
-    await client.put(files, {
-        name: `Image ${now}`,
-        onRootCidReady: (rootCid) => {
-            uploadJson(client, rootCid, body, now, fileName);
-        },
-    }).catch((err) => {
-        console.log(err);
-    })
-};
+async function main(){
+    const web3storage = new makeStorageClient();
+    const file = await fileFromPath('./scripts/img.jpeg');
+    const rootCid = await web3storage.put([file])
+    console.log(rootCid);
+}
+
+main()
+

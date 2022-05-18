@@ -1,19 +1,20 @@
 require("@nomiclabs/hardhat-waffle");
 require('dotenv').config();
-require("@nomiclabs/hardhat-ethers");
 
-/**
- * @type import('hardhat/config').HardhatUserConfig
-*/
-const { API_URL, PRIVATE_KEY } = process.env;
 module.exports = {
-   solidity: "0.8.4",
-   defaultNetwork: "ropsten",
-   networks: {
-      hardhat: {},
-      ropsten: {
-         url: API_URL,
-         accounts: [`0x${PRIVATE_KEY}`]
-      }
-   },
-}
+  solidity: "0.8.4",
+  networks : {
+    rinkeby : {
+      url : process.env.RINKEBY,
+      accounts : [process.env.PVT_KEY],
+    },
+    mumbai : {
+      url : process.env.MUMBAI,
+      accounts : [process.env.PVT_KEY],
+    },
+    kovan : {
+       url : process.env.KOVAN,
+       accounts : [process.env.PVT_KEY],
+    }
+  },
+};
