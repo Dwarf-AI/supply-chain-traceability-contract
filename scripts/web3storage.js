@@ -3,7 +3,7 @@ require('dotenv').config();
 const fs = require('fs');
 const { ethers } = require('ethers');
 
-const contractAddress = "0x2224e9DFcF8816148b120bEEF0944F6846e77d43";
+const contractAddress = "0x9a0CDaD1066D648F10FE96a2F92eaa87048bC71b";
 const artifact = require("../artifacts/contracts/AutifyNFT.sol/AutifyNFT.json")
 const providerOrUrl = {
     kovan: process.env.KOVAN,
@@ -35,7 +35,7 @@ async function fileFromPath(filePath) {
 
 async function main(){
     const web3storage = new makeStorageClient();
-    const file = await fileFromPath('./scripts/img.jpeg');
+    const file = await fileFromPath('./scripts/shoes_sample.jpg');
     const imageCid = await web3storage.put([file]);
     const jsonToUpload = {
         name: 'autify NFT',
@@ -52,7 +52,7 @@ async function main(){
         [jsonfile],
         {
             onRootCidReady : (rootCid) => {
-                callContract(rootCid, 'rinkeby', "0xF8FD64b9E74076FC2833c7de85fac6204390FA4A");
+                callContract(rootCid, 'mumbai', "0xdFCBC71976C455DE935dd2a98D8f46d5cb7f54E4");
             }
         }
     );
