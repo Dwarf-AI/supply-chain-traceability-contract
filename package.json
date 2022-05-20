@@ -11,6 +11,9 @@
   "dependencies": {
     "@alch/alchemy-web3": "^1.4.2",
     "@openzeppelin/contracts": "^4.6.0",
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "mime": "^3.0.0",
+    "nft.storage": "^6.2.0",
+    "web3.storage": "^4.2.0"
   }
 }

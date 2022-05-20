@@ -1,13 +1,13 @@
 require("dotenv").config()
-const API_URL = process.env.API_URL
+const API_URL = process.env.ROPSTEN
 const PUBLIC_KEY = process.env.PUBLIC_KEY
-const PRIVATE_KEY = process.env.PRIVATE_KEY
+const PRIVATE_KEY = process.env.PVT_KEY
+const contractAddress = "0x05033C3AB53D0A86bc77fb1376A3a91C59ACC600"
 
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
 const web3 = createAlchemyWeb3(API_URL)
 
 const contract = require("../artifacts/contracts/AutifyNFT.sol/AutifyNFT.json")
-const contractAddress = "0xc5F0646B326eEeaaf2129B5F9aAEEe0D8424568d"
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
 
 async function mintNFT(tokenURI) {
