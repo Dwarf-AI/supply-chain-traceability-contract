@@ -12,7 +12,6 @@ const providerOrUrl = {
 }
 
 async function callContract(cid, type, recieversAddress) {
-    const iface = new ethers.utils.Interface(artifact.abi);
     let provider = new ethers.providers.JsonRpcProvider(providerOrUrl[type]);
     const signer = new ethers.Wallet(process.env.PVT_KEY, provider);
     const contract_write = new ethers.Contract(contractAddress, artifact.abi, signer);
