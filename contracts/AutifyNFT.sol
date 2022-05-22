@@ -13,9 +13,9 @@ contract AutifyNFT is ERC721URIStorage, Ownable {
 
     constructor() ERC721("MyNFT", "NFT") {}
 
+    event mintComplete(uint _value);
     function mintNFT(address recipient, string memory tokenURI)
         public onlyOwner
-        returns (uint256)
     {
         _tokenIds.increment();
 
@@ -23,6 +23,6 @@ contract AutifyNFT is ERC721URIStorage, Ownable {
         _mint(recipient, newItemId);
         _setTokenURI(newItemId, tokenURI);
 
-        return newItemId;
+        emit mintComplete(newItemId);
     }
 }
