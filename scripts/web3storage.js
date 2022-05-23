@@ -3,7 +3,7 @@ require('dotenv').config();
 const fs = require('fs');
 const { ethers } = require('ethers');
 
-const contractAddress = "0x9a0CDaD1066D648F10FE96a2F92eaa87048bC71b";
+const contractAddress = "0xfb9DD578c6051fb345a5160141139C0e5ca282AE";
 const artifact = require("../artifacts/contracts/AutifyNFT.sol/AutifyNFT.json")
 const providerOrUrl = {
     kovan: process.env.KOVAN,
@@ -15,8 +15,13 @@ async function callContract(cid, type, recieversAddress) {
     let provider = new ethers.providers.JsonRpcProvider(providerOrUrl[type]);
     const signer = new ethers.Wallet(process.env.PVT_KEY, provider);
     const contract_write = new ethers.Contract(contractAddress, artifact.abi, signer);
-    await contract_write.mintNFT(recieversAddress, `ipfs://${cid}/metadata.json`).catch(err => {
+    await contract_write.mintNFT(recieversAddress, `ipfs://${cid}/metadata.json`)
+    .catch(err => {
         console.log(err);
+    });
+    contract_write.once("mintComplete", (value) => {
+        const data = ethers.BigNumber.from(value).toNumber();
+        console.log(data);
     });
 }
 
@@ -52,16 +57,16 @@ async function main(){
         [jsonfile],
         {
             onRootCidReady : (rootCid) => {
-                callContract(rootCid, 'mumbai', "0xdFCBC71976C455DE935dd2a98D8f46d5cb7f54E4");
+                callContract(rootCid, 'rinkeby', "0xdFCBC71976C455DE935dd2a98D8f46d5cb7f54E4");
             }
         }
     );
-    console.log(imageCid,jsonCid);
+    
+    console.log(jsonCid);
 }
 
 main()
   .catch(err => {
       console.error(err)
       process.exit(1)
-  })
-
+})
