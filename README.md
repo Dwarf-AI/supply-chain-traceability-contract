@@ -1,5 +1,8 @@
 <p align="center">
+
+<a href="https://dwarf-ai.com" target="_blank">
 <img src="https://miro.medium.com/fit/c/176/176/1*uDAWoWlMD7pBnJ-IOmKtdw.jpeg" width = 205 height = 205/>
+</a>
 <hr>
 </p>
 
@@ -7,7 +10,7 @@ As everything becomes more digital, there's a need to replicate the properties o
 
 This repository digitalizes the physical products like shoes, cars etc. using blockchain technology
 
-## Contract ([AutifyNFT.sol](https://github.com/autifynetwork/Authentication-contracts/blob/master/contracts/AutifyNFT.sol) )
+## Contract ([NFT.sol](https://github.com/autifynetwork/Authentication-contracts/blob/master/contracts/AutifyNFT.sol) )
 This contract is extended ERC721.
 1.  Ownership is managed through the uniqueID and metadata that no other token can replicate
 2.  NFTs are minted through smart contracts that assign ownership and manage the transferability of the NFT's
